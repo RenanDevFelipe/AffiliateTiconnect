@@ -1,21 +1,32 @@
-import { View, Text , StyleSheet,TextInput,TouchableOpacity,Linking} from "react-native"
+import { View, Text,Button ,  Image , StyleSheet,TextInput,TouchableOpacity,Linking} from "react-native"
+import { ButtonInicio } from "../../components/Buttoninicio";
 
 
 export function LoginScreen() {
     return(
         <View style={styles.container}>
             <View style={styles.top}>
+                <Image
+                    style={styles.imagem}
+                    source={require('../../assets/login.png')}
+                />
                 <Text style={styles.txtLogin}>Login</Text>
                 <Text  style={styles.txtWelcome}>Bem vindo de volta , sentimos a sua falta!</Text>
             </View>
             <View style={styles.mid}>
-                <TextInput style={styles.textInput} placeholderTextColor={"#000"} placeholder="Nome" />
+                <TextInput style={styles.textInput} placeholderTextColor={"#000"} placeholder="Email" />
                 <TextInput style={styles.textInput} placeholderTextColor={"#000"} placeholder="Senha" />
                 <TouchableOpacity style={styles.textEsqueceu}>
                     <Text style={styles.textEsqueceu}>Esqueceu a senha?</Text>
                 </TouchableOpacity>
+                <ButtonInicio
+                    title="Login"
+                    corString="#fff"
+                    corBg="#ff6200"
+                    border="#ff6200"
+                    widthPercent="85%"
+                />
             </View>
-            <View style={styles.bot}></View>
         </View>
     )
 }
@@ -28,7 +39,7 @@ const styles = StyleSheet.create({
     top: {
         flex: 2,
         width: "100%",
-        justifyContent: "flex-end",
+        justifyContent: "flex-start",
         alignItems: "center",
     },
     txtLogin:{
@@ -67,11 +78,13 @@ const styles = StyleSheet.create({
         width: "89%",
         textAlign: "right",
     },
-    bot: {
-        flex: 3,
+    imagem: {
         width: "100%",
+        height: 300,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: "18%",
 
-        backgroundColor: "red",
     }
   });
 
