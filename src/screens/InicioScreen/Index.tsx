@@ -12,7 +12,7 @@ export function InicioScreen() {
             </View>
             <View style={StyleInicio.text}>
                 <Text style={StyleInicio.titlePrincipal}>
-                    Hello!, Wellcome
+                    Ola!, Seja bem vinde!
                 </Text>
                 <Text style={StyleInicio.titleSecundary}>
                     Maximize seus ganhos com o poder do marketing de afiliados, transformando cada clique em uma oportunidade de sucesso!
