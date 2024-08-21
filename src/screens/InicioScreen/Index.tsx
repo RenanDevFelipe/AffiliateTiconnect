@@ -1,7 +1,14 @@
 import { View, Text, StyleSheet, Image } from "react-native";
-import { ButtonInicio } from "../../@types/ButtonInicio";
+import { ButtonInicio } from "../../components/Buttoninicio"; // Corrigir o caminho conforme necessário
+import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../../@types/types";
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type InicioScreenNavigationProp = StackNavigationProp<RootStackParamList, 'InicioScreen'>;
 
 export function InicioScreen() {
+    const navigation = useNavigation<InicioScreenNavigationProp>();
+
     return (
         <View>
             <View style={StyleInicio.imagem}>
@@ -12,7 +19,7 @@ export function InicioScreen() {
             </View>
             <View style={StyleInicio.text}>
                 <Text style={StyleInicio.titlePrincipal}>
-                    Ola!, Seja bem vinde!
+                    Olá!, Seja bem-vindo!
                 </Text>
                 <Text style={StyleInicio.titleSecundary}>
                     Maximize seus ganhos com o poder do marketing de afiliados, transformando cada clique em uma oportunidade de sucesso!
@@ -20,11 +27,22 @@ export function InicioScreen() {
             </View>
 
             <View style={StyleInicio.btDiv}>
-                <ButtonInicio title="Entrar na minha conta" corBg="#ff6200" corString="#fff" border="#ff6200"/>
-                <ButtonInicio title="Registrar-se" corBg="#fff" corString="#ff6200" border="#ff6200"/>
+                <ButtonInicio
+                    title="Entrar na minha conta"
+                    corBg="#ff6200"
+                    corString="#fff"
+                    border="#ff6200"
+                    onPress={() => navigation.navigate("LoginScreen")}
+                />
+                <ButtonInicio
+                    title="Registrar-se"
+                    corBg="#fff"
+                    corString="#ff6200"
+                    border="#ff6200"
+                />
             </View>
         </View>
-    )
+    );  
 }
 
 const StyleInicio = StyleSheet.create({
@@ -58,4 +76,4 @@ const StyleInicio = StyleSheet.create({
     btDiv: {
         marginTop: 30,
     }
-})
+});
