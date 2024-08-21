@@ -50,7 +50,7 @@ const StyleInicio = StyleSheet.create({
         width: "100%",
         alignItems: "center",
         justifyContent: "center",
-        marginTop: "18%",
+        marginTop: "30%",
     },
     imagemInicio: {
         width: 400,
