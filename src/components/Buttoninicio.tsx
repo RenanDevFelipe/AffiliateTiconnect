@@ -1,18 +1,26 @@
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet, Dimensions } from "react-native";
+import React from "react";
 
 interface VariavelBT {
     title: string;
     corBg: string;
     corString: string;
     border: string;
+    widthPercent: string;
     onPress?: () => void; // onPress é opcional
 }
 
 export function ButtonInicio(props: VariavelBT) {
+
+    const widthPercentage = parseFloat(props.widthPercent);
+
+    const screenWidth = Dimensions.get('window').width;
+    const width = (screenWidth * widthPercentage) / 100
+
     return (
         <View style={StyleBt.button}>
             <TouchableOpacity
-                style={[StyleBt.BTStyle, { backgroundColor: props.corBg, borderColor: props.border }]}
+                style={[StyleBt.BTStyle, { backgroundColor: props.corBg, borderColor: props.border, width}]}
                 onPress={props.onPress} // Adiciona a função onPress aqui
             >
                 <Text style={{ color: props.corString }}>
@@ -31,7 +39,6 @@ const StyleBt = StyleSheet.create({
     BTStyle: {
         marginTop: 20,
         borderRadius: 10,
-        width: "85%",
         padding: 23,
         justifyContent: "center",
         alignItems: "center",

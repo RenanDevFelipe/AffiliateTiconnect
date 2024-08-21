@@ -33,12 +33,14 @@ export function InicioScreen() {
                     corString="#fff"
                     border="#ff6200"
                     onPress={() => navigation.navigate("LoginScreen")}
+                    widthPercent="85%"
                 />
                 <ButtonInicio
                     title="Registrar-se"
                     corBg="#fff"
                     corString="#ff6200"
                     border="#ff6200"
+                    widthPercent="85%"
                 />
             </View>
         </View>
