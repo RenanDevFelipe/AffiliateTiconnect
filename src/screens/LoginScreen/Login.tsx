@@ -1,9 +1,37 @@
-import { View, Text,Button ,  Image , StyleSheet,TextInput,TouchableOpacity,Linking} from "react-native"
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert } from "react-native";
 import { ButtonInicio } from "../../components/Buttoninicio";
-
+import { useState } from "react";
+import * as React from 'react';
 
 export function LoginScreen() {
-    return(
+    const [email, setEmail] = useState<string>('');
+    const [senha, setSenha] = useState<string>('');
+
+    const handleLogin = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/login', {  // Substitua pelo IP correto caso necessário
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password: senha }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                Alert.alert("Sucesso", "Login bem-sucedido");
+                // Redirecionar para outra página ou salvar o token, etc.
+            } else {
+                Alert.alert("Erro", data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            Alert.alert("Erro", "Erro ao tentar fazer login");
+        }
+    };
+
+    return (
         <View style={styles.container}>
             <View style={styles.top}>
                 <Image
@@ -11,11 +39,24 @@ export function LoginScreen() {
                     source={require('../../assets/login.png')}
                 />
                 <Text style={styles.txtLogin}>Login</Text>
-                <Text  style={styles.txtWelcome}>Bem vindo de volta , sentimos a sua falta!</Text>
+                <Text style={styles.txtWelcome}>Bem vindo de volta, sentimos a sua falta!</Text>
             </View>
             <View style={styles.mid}>
-                <TextInput style={styles.textInput} placeholderTextColor={"#000"} placeholder="Email" />
-                <TextInput style={styles.textInput} placeholderTextColor={"#000"} placeholder="Senha" />
+                <TextInput
+                    onChangeText={setEmail}
+                    value={email}
+                    style={styles.textInput}
+                    placeholderTextColor={"#000"}
+                    placeholder="Email"
+                />
+                <TextInput
+                    onChangeText={setSenha}
+                    value={senha}
+                    style={styles.textInput}
+                    placeholderTextColor={"#000"}
+                    placeholder="Senha"
+                    secureTextEntry={true}
+                />
                 <TouchableOpacity style={styles.textEsqueceu}>
                     <Text style={styles.textEsqueceu}>Esqueceu a senha?</Text>
                 </TouchableOpacity>
@@ -25,16 +66,17 @@ export function LoginScreen() {
                     corBg="#ff6200"
                     border="#ff6200"
                     widthPercent="85%"
+                    onPress={handleLogin}
                 />
             </View>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-      width: "100%",
+        width: "100%",
     },
     top: {
         flex: 2,
@@ -42,17 +84,16 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
     },
-    txtLogin:{
+    txtLogin: {
         color: "#ff6200",
         fontWeight: "bold",
         fontSize: 40,
         shadowColor: '#ff6200',
         shadowOffset: { width: 1, height: 4 },
         shadowOpacity: 0.8,
-        shadowRadius: 1,  
+        shadowRadius: 1,
     },
     txtWelcome: {
-
         fontWeight: "300",
         fontSize: 15,
         width: "50%",
@@ -65,7 +106,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         gap: 20,
     },
-    textInput:{
+    textInput: {
         borderRadius: 10,
         width: "90%",
         height: 50,
@@ -74,7 +115,7 @@ const styles = StyleSheet.create({
         borderColor: "#ff6200",
         borderWidth: 2,
     },
-    textEsqueceu:{
+    textEsqueceu: {
         width: "89%",
         textAlign: "right",
     },
@@ -84,7 +125,5 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: "18%",
-
     }
-  });
-
+});
