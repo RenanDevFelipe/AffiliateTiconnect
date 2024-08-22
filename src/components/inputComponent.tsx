@@ -6,7 +6,7 @@ interface PropsInput {
     placeholder: string,
     border: string,
     widthPercent: string,
-    value: string,
+    value: any,
     BorderRadius: number;
 }
 
