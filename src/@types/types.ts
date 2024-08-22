@@ -2,4 +2,5 @@
 export type RootStackParamList = {
     InicioScreen: undefined;
     LoginScreen: undefined;
+    RegistroScreen: undefined;
 };

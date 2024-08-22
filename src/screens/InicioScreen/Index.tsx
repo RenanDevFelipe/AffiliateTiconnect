@@ -40,6 +40,7 @@ export function InicioScreen() {
                     corBg="#fff"
                     corString="#ff6200"
                     border="#ff6200"
+                    onPress={() => navigation.navigate("RegistroScreen")}
                     widthPercent="85%"
                 />
             </View>
