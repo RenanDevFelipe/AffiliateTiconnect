@@ -6,16 +6,31 @@ export function LoginScreen() {
     const [email, setEmail] = useState<string>('');
     const [senha, setSenha] = useState<string>('');
 
+    const validarEmail = (email: string) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    };
+
     const handleLogin = async () => {
+        if (!validarEmail(email)) {
+            Alert.alert("Erro", "Por favor, insira um email válido.");
+            return;
+        }
+
+        if (senha.length < 8) {
+            Alert.alert("Erro", "A senha deve ter no mínimo 8 caracteres.");
+            return;
+        }
+
         try {
             console.log('Tentando fazer login com:', { email, senha });
 
-            const response = await fetch('http://192.168.0.103:8081/login', {
+            const response = await fetch('http://192.168.0.132:4000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password: senha }), // Certifique-se de usar `password`
+                body: JSON.stringify({ email, password: senha }),
             });
 
             const data = await response.json();
