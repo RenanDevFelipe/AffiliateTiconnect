@@ -1,7 +1,6 @@
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert } from "react-native";
 import { ButtonInicio } from "../../components/Buttoninicio";
 import { useState } from "react";
-import * as React from 'react';
 
 export function LoginScreen() {
     const [email, setEmail] = useState<string>('');
@@ -9,24 +8,26 @@ export function LoginScreen() {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://localhost:3000/login', {  // Substitua pelo IP correto caso necessário
+            console.log('Tentando fazer login com:', { email, senha });
+
+            const response = await fetch('http://192.168.0.103:8081/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password: senha }),
+                body: JSON.stringify({ email, password: senha }), // Certifique-se de usar `password`
             });
 
             const data = await response.json();
+            console.log('Resposta da API:', data);
 
             if (response.ok) {
                 Alert.alert("Sucesso", "Login bem-sucedido");
-                // Redirecionar para outra página ou salvar o token, etc.
             } else {
-                Alert.alert("Erro", data.message);
+                Alert.alert("Erro", data.message || "Erro desconhecido");
             }
         } catch (error) {
-            console.error(error);
+            console.error('Erro ao tentar fazer login:', error);
             Alert.alert("Erro", "Erro ao tentar fazer login");
         }
     };
